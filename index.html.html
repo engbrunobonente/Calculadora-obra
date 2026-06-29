@@ -70,9 +70,45 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .print-btn{background:none;border:0.5px solid #cec9bf;border-radius:7px;padding:6px 12px;font-size:11px;color:#5f5e5a;cursor:pointer;font-family:inherit}
 .print-btn:hover{background:#f4f3ef}
 .rodape{text-align:center;margin-top:1.2rem;font-size:11px;color:#b4b2a9}
+.modal-print{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:300;align-items:center;justify-content:center}
+.modal-print.open{display:flex}
+.modal-box{background:#fff;border-radius:14px;padding:1.6rem;max-width:340px;width:90%;text-align:center}
+.modal-box h3{font-size:15px;font-weight:700;color:#1a1a18;margin-bottom:6px}
+.modal-box p{font-size:12px;color:#888780;margin-bottom:1.2rem}
+.modal-opts{display:flex;flex-direction:column;gap:10px}
+.modal-opt{padding:12px 16px;border-radius:10px;border:0.5px solid #dedad2;background:#f4f3ef;cursor:pointer;text-align:left;font-family:inherit;font-size:12px;font-weight:600;color:#1a1a18;transition:background .15s}
+.modal-opt:hover{background:#ebe9e2}
+.modal-opt span{display:block;font-weight:400;color:#888780;font-size:11px;margin-top:2px}
+.modal-cancel{margin-top:12px;background:none;border:none;font-size:11px;color:#b4b2a9;cursor:pointer;font-family:inherit}
+@media print{
+  .modal-print,.sobre-btn,.acesso-btn,#painel-admin{display:none!important}
+  body.print-orcamento .app{display:none!important}
+  body.print-orcamento #folha-orcamento{display:block!important}
+  body:not(.print-orcamento) #folha-orcamento{display:none!important}
+}
+#folha-orcamento{display:none;font-family:Arial,sans-serif;padding:2cm;color:#000}
+.forc-header{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid #000;padding-bottom:12px;margin-bottom:16px}
+.forc-titulo{font-size:18px;font-weight:700}
+.forc-sub{font-size:11px;color:#444;margin-top:2px}
+.forc-eng{font-size:11px;text-align:right;line-height:1.6}
+.forc-section{margin-bottom:14px}
+.forc-section-title{font-size:12px;font-weight:700;background:#1a1a18;color:#fff;padding:4px 10px;margin-bottom:0}
+.forc-table{width:100%;border-collapse:collapse;font-size:11px}
+.forc-table th{background:#f4f4f4;font-weight:700;padding:5px 8px;border:1px solid #ccc;text-align:left}
+.forc-table td{padding:5px 8px;border:1px solid #ccc}
+.forc-table td.val{width:100px;min-width:80px}
+.forc-footer{margin-top:20px;border-top:1px solid #ccc;padding-top:10px;font-size:10px;color:#666;text-align:center}
+.forc-obs{background:#fff9e6;border:1px solid #e8d46a;padding:8px 12px;font-size:10px;margin-bottom:14px;border-radius:4px}
+.resumo-total{background:#fff;border:0.5px solid #dedad2;border-radius:10px;padding:.9rem 1rem;margin-bottom:9px}
+.resumo-total-titulo{font-size:12px;font-weight:600;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;color:#1a1a18}
+.resumo-linha{display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:0.5px solid #f0ede6;font-size:11px}
+.resumo-linha:last-child{border-bottom:none}
+.resumo-label{color:#5f5e5a}
+.resumo-valor{color:#1a1a18;font-weight:600}
+.resumo-secao{font-size:10px;font-weight:700;color:#b4b2a9;text-transform:uppercase;letter-spacing:.08em;margin-top:8px;margin-bottom:3px}
 .acesso-btn{position:fixed;bottom:1.2rem;left:1.2rem;background:#3c3489;color:#fff;border:none;border-radius:50px;padding:10px 18px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;box-shadow:0 4px 16px rgba(60,52,137,.35);z-index:100;display:flex;align-items:center;gap:7px}
 .acesso-btn:hover{background:#534AB7}
-.sobre-btn{position:fixed;bottom:1.2rem;right:1.2rem;background:#1a1a18;color:#fff;border:none;border-radius:50px;padding:10px 18px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;box-shadow:0 4px 16px rgba(0,0,0,.25);z-index:100;display:flex;align-items:center;gap:7px}
+.sobre-btn{position:fixed;bottom:4.5rem;left:1.2rem;background:#1a1a18;color:#fff;border:none;border-radius:50px;padding:10px 18px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;box-shadow:0 4px 16px rgba(0,0,0,.25);z-index:100;display:flex;align-items:center;gap:7px}
 .sobre-btn:hover{background:#333}
 .sobre-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;overflow-y:auto;padding:1.5rem 1rem}
 .sobre-overlay.open{display:flex;align-items:flex-start;justify-content:center}
@@ -106,7 +142,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 @media(max-width:520px){.inline-grid{grid-template-columns:1fr}.steps .st{font-size:9px}}
 .aviso{display:flex;align-items:flex-start;gap:10px;background:#fef9ec;border:0.5px solid #e8d46a;border-radius:10px;padding:.9rem 1.1rem;margin-bottom:1.2rem;font-size:12px;color:#5a4a00;line-height:1.5}
 .aviso-icon{font-size:16px;flex-shrink:0;margin-top:1px}
-@media print{body{background:#fff;padding:0}.app{max-width:100%}.header{border-radius:0}.navb,.print-btn,.steps,.badd,.brm{display:none!important}.sec{display:block!important}.pro-blur{filter:none;opacity:1;pointer-events:auto}.pro-msg{display:none}}
+@media print{body{background:#fff;padding:0}.app{max-width:100%}.header{border-radius:0}.navb,.print-btn,.steps,.badd,.brm{display:none!important}.sec{display:block!important}.pro-wrap:not(.pro-desbloqueado) .pro-blur{filter:blur(8px)!important;opacity:0.15!important}.pro-wrap:not(.pro-desbloqueado) .pro-msg{display:none!important}.pro-wrap:not(.pro-desbloqueado)::after{content:"Conteúdo exclusivo para assinantes Pro — acesse engbrunobonente no Instagram";display:block;text-align:center;font-size:11px;color:#888780;padding:1rem;border:0.5px solid #dedad2;border-radius:8px;margin-top:8px}.sobre-btn,.acesso-btn,.sobre-overlay,#painel-admin{display:none!important}}
 </style>
 </head>
 <body>
@@ -445,9 +481,37 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     </div>
     </div>
 
+    <!-- RESUMO TOTAL DE MATERIAIS — PRO -->
+    <div class="pro-wrap">
+      <div class="resumo-total pro-blur" id="resumoTotal" style="display:none">
+        <p class="resumo-total-titulo">📦 Resumo total de materiais <span class="badge bp">pro</span></p>
+        <div class="resumo-linha"><span class="resumo-label">Lajotas total</span><span class="resumo-valor" id="rTotalLajotas">—</span></div>
+        <div class="resumo-linha"><span class="resumo-label">Argila total</span><span class="resumo-valor" id="rTotalArgila">—</span></div>
+        <div class="resumo-linha"><span class="resumo-label">Cimento total</span><span class="resumo-valor" id="rTCimTotal">—</span></div>
+        <div class="resumo-linha"><span class="resumo-label">Areia total</span><span class="resumo-valor" id="rTAreiaTotal">—</span></div>
+        <div class="resumo-linha" id="rLTSupercal" style="display:none"><span class="resumo-label">Supercal total</span><span class="resumo-valor" id="rTotalSupercal">—</span></div>
+        <div class="resumo-linha" id="rLTMassa" style="display:none"><span class="resumo-label">Massa fina Grantex total</span><span class="resumo-valor" id="rTotalMassa">—</span></div>
+        <div class="resumo-linha" id="rLTAC1" style="display:none"><span class="resumo-label">Argamassa AC1 total</span><span class="resumo-valor" id="rTotalAC1">—</span></div>
+        <div class="resumo-linha" id="rLTAC2" style="display:none"><span class="resumo-label">Argamassa AC2 total</span><span class="resumo-valor" id="rTotalAC2">—</span></div>
+        <div class="resumo-linha" id="rLTAC3" style="display:none"><span class="resumo-label">Argamassa AC3 total</span><span class="resumo-valor" id="rTotalAC3">—</span></div>
+        <div class="resumo-linha" id="rLTCerInt" style="display:none"><span class="resumo-label">Cerâmica interna total (m²)</span><span class="resumo-valor" id="rTotalCerInt">—</span></div>
+        <div class="resumo-linha" id="rLTCerExt" style="display:none"><span class="resumo-label">Cerâmica externa total (m²)</span><span class="resumo-valor" id="rTotalCerExt">—</span></div>
+        <div class="resumo-linha" id="rLTPor" style="display:none"><span class="resumo-label">Porcelanato total (m²)</span><span class="resumo-valor" id="rTotalPor">—</span></div>
+      </div>
+      <div class="pro-msg">
+        <p>🔒 Resumo total de materiais</p>
+        <span>Disponível no plano completo</span>
+        <div class="senha-form">
+          <input class="senha-input" type="password" placeholder="Digite a senha" onkeydown="if(event.key==='Enter')verificarSenha(this)">
+          <button class="senha-btn" onclick="verificarSenha(this.previousElementSibling)">Desbloquear</button>
+          <span class="senha-erro">Senha incorreta</span>
+        </div>
+      </div>
+    </div>
+
     <div class="navb" style="margin-top:1rem">
       <button class="bb bback" onclick="go(3)">← Editar dados</button>
-      <button class="bb bnext" onclick="window.print()">⎙ Imprimir relatório</button>
+      <button class="bb bnext" onclick="document.getElementById('modalPrint').classList.add('open')">⎙ Imprimir</button>
     </div>
   </div>
 
@@ -845,9 +909,236 @@ function calc(){
 
   document.getElementById('totalGeral').textContent = hasPrecos ? fmt(totalGeral) : 'Informe os preços para calcular';
 
-  go(4);
+  // SALVAR VARIÁVEIS GLOBAIS PARA IMPRESSÃO
+  _calc = {
+    qtdLajotas, qtdArgila, qtdCimAlv, qtdAreiaAlv, tipoLajNome: laj.nome,
+    qtdCimChap: qtdCimChap||0, qtdAreiaChap: qtdAreiaChap||0,
+    qtdCimEmb: qtdCimEmb||0, qtdAreiaEmb: qtdAreiaEmb||0, qtdSupercalEmb: qtdSupercalEmb||0,
+    qtdMassaFina: qtdMassaFina||0, qtdAC1Massa: qtdAC1Massa||0, qtdCimMassa: qtdCimMassa||0,
+    qtdAC1Piso: qtdAC1Piso||0, qtdAC2Piso: qtdAC2Piso||0, qtdAC3Piso: qtdAC3Piso||0,
+    qtdAC1Azul: qtdAC1Azul||0, qtdAC2Azul: qtdAC2Azul||0, qtdAC3Azul: qtdAC3Azul||0,
+    qtdAreiaCP: qtdAreiaCP||0, qtdCimCP: qtdCimCP||0,
+    m2PisoAC1: m2PisoAC1||0, m2PisoAC2: m2PisoAC2||0, m2PisoAC3: m2PisoAC3||0,
+    m2AzAC1: m2AzAC1||0, m2AzAC2: m2AzAC2||0, m2AzAC3: m2AzAC3||0,
+  };
+
+  // RESUMO TOTAL DE MATERIAIS
+  const resumo = document.getElementById('resumoTotal');
+  resumo.style.display = 'block';
+
+  // Resetar linhas opcionais
+  ['rLTSupercal','rLTMassa','rLTAC1','rLTAC2','rLTAC3','rLTCerInt','rLTCerExt','rLTPor']
+    .forEach(id => { const el = document.getElementById(id); if(el) el.style.display='none'; });
+
+  // Lajotas e argila — sempre presentes
+  document.getElementById('rTotalLajotas').textContent = qtdLajotas + ' unid';
+  document.getElementById('rTotalArgila').textContent  = qtdArgila + ' sacos (18kg)';
+
+  // Cimento total — soma todas as etapas
+  const totalCim = parseFloat(((qtdCimAlv||0)+(qtdCimChap||0)+(qtdCimEmb||0)+(qtdCimMassa||0)+(qtdCimCP||0)).toFixed(1));
+  document.getElementById('rTCimTotal').textContent = totalCim + ' sacos (50kg)';
+
+  // Areia total — soma todas as etapas
+  const totalAreia = parseFloat(((qtdAreiaAlv||0)+(qtdAreiaChap||0)+(qtdAreiaEmb||0)+(qtdAreiaCP||0)).toFixed(2));
+  document.getElementById('rTAreiaTotal').textContent = totalAreia + ' m³';
+
+  // Supercal total
+  if ((qtdSupercalEmb||0) > 0) {
+    document.getElementById('rLTSupercal').style.display = '';
+    document.getElementById('rTotalSupercal').textContent = qtdSupercalEmb + ' sacos (20kg)';
+  }
+
+  // Massa fina Grantex total
+  if ((qtdMassaFina||0) > 0) {
+    document.getElementById('rLTMassa').style.display = '';
+    document.getElementById('rTotalMassa').textContent = qtdMassaFina + ' sacos (20kg)';
+  }
+
+  // AC1 total = massa fina AC1 + piso AC1 + azulejo AC1
+  const totalAC1 = (qtdAC1Massa||0) + (qtdAC1Piso||0) + (qtdAC1Azul||0);
+  if (totalAC1 > 0) {
+    document.getElementById('rLTAC1').style.display = '';
+    document.getElementById('rTotalAC1').textContent = totalAC1 + ' sacos (20kg)';
+  }
+
+  // AC2 total = piso AC2 + azulejo AC2
+  const totalAC2 = (qtdAC2Piso||0) + (qtdAC2Azul||0);
+  if (totalAC2 > 0) {
+    document.getElementById('rLTAC2').style.display = '';
+    document.getElementById('rTotalAC2').textContent = totalAC2 + ' sacos (20kg)';
+  }
+
+  // AC3 total = piso AC3 + azulejo AC3
+  const totalAC3 = (qtdAC3Piso||0) + (qtdAC3Azul||0);
+  if (totalAC3 > 0) {
+    document.getElementById('rLTAC3').style.display = '';
+    document.getElementById('rTotalAC3').textContent = totalAC3 + ' sacos (20kg)';
+  }
+
+  // Cerâmica interna total (piso + azulejo)
+  const totalCerInt = parseFloat(((m2PisoAC1||0) + (m2AzAC1||0)).toFixed(1));
+  if (totalCerInt > 0) {
+    document.getElementById('rLTCerInt').style.display = '';
+    document.getElementById('rTotalCerInt').textContent = totalCerInt + ' m²';
+  }
+
+  // Cerâmica externa total (piso + azulejo)
+  const totalCerExt = parseFloat(((m2PisoAC2||0) + (m2AzAC2||0)).toFixed(1));
+  if (totalCerExt > 0) {
+    document.getElementById('rLTCerExt').style.display = '';
+    document.getElementById('rTotalCerExt').textContent = totalCerExt + ' m²';
+  }
+
+  // Porcelanato total (piso + azulejo)
+  const totalPor = parseFloat(((m2PisoAC3||0) + (m2AzAC3||0)).toFixed(1));
+  if (totalPor > 0) {
+    document.getElementById('rLTPor').style.display = '';
+    document.getElementById('rTotalPor').textContent = totalPor + ' m²';
+  }
+
+    go(4);
 }
 
+
+// ========================
+// VARIÁVEIS GLOBAIS DO ÚLTIMO CÁLCULO
+// ========================
+let _calc = {};
+
+// ========================
+// FUNÇÕES DE IMPRESSÃO
+// ========================
+
+function imprimirRelatorio() {
+  document.getElementById('modalPrint').classList.remove('open');
+  window.print();
+}
+
+function verificarProParaOrcamento() {
+  const desbloqueado = document.querySelector('.pro-desbloqueado');
+  if (!desbloqueado) {
+    document.getElementById('modalPrint').classList.remove('open');
+    alert('🔒 A Solicitação de Orçamento é um recurso Pro.\n\nDigite sua senha Pro em qualquer bloco bloqueado para desbloquear.');
+    return;
+  }
+  imprimirOrcamento();
+}
+
+function imprimirOrcamento() {
+  document.getElementById('modalPrint').classList.remove('open');
+
+  if (!_calc.qtdLajotas) {
+    alert('Calcule a obra primeiro antes de imprimir a solicitação de orçamento.');
+    return;
+  }
+
+  function secao(titulo, itens) {
+    const rows = itens.filter(i => i.qtd > 0);
+    if (!rows.length) return '';
+    let html = `<div class="forc-section">
+      <div class="forc-section-title">${titulo}</div>
+      <table class="forc-table">
+        <tr><th>Material</th><th>Quantidade</th><th class="val">Valor unit. (R$)</th><th class="val">Total (R$)</th></tr>`;
+    rows.forEach(r => {
+      html += `<tr><td>${r.nome}</td><td>${r.qtd} ${r.un}</td><td class="val">&nbsp;</td><td class="val">&nbsp;</td></tr>`;
+    });
+    html += `</table></div>`;
+    return html;
+  }
+
+  const c = _calc;
+  const totalCim   = parseFloat(((c.qtdCimAlv||0)+(c.qtdCimChap||0)+(c.qtdCimEmb||0)+(c.qtdCimMassa||0)+(c.qtdCimCP||0)).toFixed(1));
+  const totalAreia = parseFloat(((c.qtdAreiaAlv||0)+(c.qtdAreiaChap||0)+(c.qtdAreiaEmb||0)+(c.qtdAreiaCP||0)).toFixed(2));
+  const totalAC1   = (c.qtdAC1Massa||0)+(c.qtdAC1Piso||0)+(c.qtdAC1Azul||0);
+  const totalAC2   = (c.qtdAC2Piso||0)+(c.qtdAC2Azul||0);
+  const totalAC3   = (c.qtdAC3Piso||0)+(c.qtdAC3Azul||0);
+  const cerInt     = parseFloat(((c.m2PisoAC1||0)+(c.m2AzAC1||0)).toFixed(1));
+  const cerExt     = parseFloat(((c.m2PisoAC2||0)+(c.m2AzAC2||0)).toFixed(1));
+  const porcel     = parseFloat(((c.m2PisoAC3||0)+(c.m2AzAC3||0)).toFixed(1));
+
+  // Lista única de todos os materiais — sem separação por etapa
+  const itens = [
+    { nome:'Lajotas ' + (c.tipoLajNome || ''), qtd: c.qtdLajotas, un:'unid' },
+    { nome:'Argila',             qtd: c.qtdArgila,   un:'sacos 18kg' },
+    { nome:'Cimento',            qtd: totalCim,      un:'sacos 50kg' },
+    { nome:'Areia',              qtd: totalAreia,    un:'m³'         },
+    { nome:'Supercal',           qtd: c.qtdSupercalEmb, un:'sacos 20kg' },
+    { nome:'Massa fina Grantex', qtd: c.qtdMassaFina,   un:'sacos 20kg' },
+    { nome:'Argamassa AC1',      qtd: totalAC1,      un:'sacos 20kg' },
+    { nome:'Argamassa AC2',      qtd: totalAC2,      un:'sacos 20kg' },
+    { nome:'Argamassa AC3',      qtd: totalAC3,      un:'sacos 20kg' },
+    { nome:'Cerâmica interna',   qtd: cerInt,        un:'m²'         },
+    { nome:'Cerâmica externa',   qtd: cerExt,        un:'m²'         },
+    { nome:'Porcelanato',        qtd: porcel,        un:'m²'         },
+  ].filter(i => i.qtd > 0);
+
+  let html = `<table style="width:100%;border-collapse:collapse;font-size:11px;margin-bottom:16px">
+    <tr>
+      <th style="background:#1a1a18;color:#fff;padding:7px 10px;border:1px solid #ccc;text-align:left">Descrição do material</th>
+      <th style="background:#1a1a18;color:#fff;padding:7px 10px;border:1px solid #ccc;text-align:center;width:100px">Quantidade</th>
+      <th style="background:#1a1a18;color:#fff;padding:7px 10px;border:1px solid #ccc;text-align:center;width:110px">Valor unit. (R$)</th>
+      <th style="background:#1a1a18;color:#fff;padding:7px 10px;border:1px solid #ccc;text-align:center;width:110px">Total (R$)</th>
+    </tr>`;
+
+  itens.forEach((r, i) => {
+    const bg = i % 2 === 0 ? '#fff' : '#f9f9f9';
+    html += `<tr style="background:${bg}">
+      <td style="padding:7px 10px;border:1px solid #ccc">${r.nome}</td>
+      <td style="padding:7px 10px;border:1px solid #ccc;text-align:center">${r.qtd} ${r.un}</td>
+      <td style="padding:7px 10px;border:1px solid #ccc">&nbsp;</td>
+      <td style="padding:7px 10px;border:1px solid #ccc">&nbsp;</td>
+    </tr>`;
+  });
+
+  html += `<tr>
+    <td colspan="3" style="padding:8px 10px;border:1px solid #ccc;font-weight:700;text-align:right;background:#f4f4f4">TOTAL GERAL (R$)</td>
+    <td style="padding:8px 10px;border:1px solid #ccc;background:#f4f4f4">&nbsp;</td>
+  </tr></table>`;
+
+  // Abrir em nova janela para impressão limpa
+  const win = window.open('', '_blank', 'width=800,height=900');
+  win.document.write(`<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Solicitação de Orçamento</title>
+<style>
+  body{font-family:Arial,sans-serif;padding:2cm;color:#000;margin:0}
+  .forc-header{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid #000;padding-bottom:12px;margin-bottom:12px}
+  .forc-titulo{font-size:17px;font-weight:700}
+  .forc-sub{font-size:10px;color:#444;margin-top:2px}
+  .forc-eng{font-size:10px;text-align:right;line-height:1.7}
+  .forc-obs{background:#fff9e6;border:1px solid #e8d46a;padding:7px 10px;font-size:10px;margin-bottom:12px;border-radius:4px}
+  .forc-section{margin-bottom:12px}
+  .forc-section-title{font-size:11px;font-weight:700;background:#1a1a18;color:#fff;padding:4px 10px;margin-bottom:0}
+  table{width:100%;border-collapse:collapse;font-size:10px}
+  th{background:#f4f4f4;font-weight:700;padding:5px 8px;border:1px solid #ccc;text-align:left}
+  td{padding:5px 8px;border:1px solid #ccc}
+  .val{width:100px;min-width:80px}
+  .forc-footer{margin-top:16px;border-top:1px solid #ccc;padding-top:8px;font-size:9px;color:#666;text-align:center}
+  @media print{body{padding:1cm}}
+</style>
+</head>
+<body>
+<div class="forc-header">
+  <div>
+    <div class="forc-titulo">Solicitação de Orçamento de Materiais</div>
+    <div class="forc-sub">Gerado pela Calculadora de Obra — Eng. Bruno Bonente</div>
+  </div>
+  <div class="forc-eng">
+    <strong>Eng. Bruno Bonente</strong><br>
+    Engenheiro Civil | CREA-MG<br>
+    @engbrunobonente
+  </div>
+</div>
+<div class="forc-obs">⚠️ Quantitativos exatos sem percentual de perda. Recomenda-se acrescentar 5% a 10% na compra.</div>
+${html}
+<div class="forc-footer">Calculadora de Obra — Eng. Bruno Bonente | @engbrunobonente</div>
+</body></html>`);
+  win.document.close();
+  win.focus();
+  setTimeout(() => { win.print(); }, 600);
+}
 
 // ========================
 // SISTEMA DE SENHAS COM ASSINATURA HMAC
@@ -994,6 +1285,47 @@ renderPisos();
       <button onclick="navigator.clipboard.writeText(document.getElementById('admin-resultado').value)" style="padding:8px 12px;background:#2c2c2a;color:#aaa9a5;border:0.5px solid #444;border-radius:7px;font-size:11px;cursor:pointer;font-family:inherit">Copiar</button>
     </div>
     <p style="font-size:10px;color:#666;margin-top:8px">Para fechar: remova #admin da URL. Envie a senha gerada ao cliente pelo WhatsApp.</p>
+  </div>
+</div>
+
+<!-- MODAL DE IMPRESSÃO -->
+<div id="modalPrint" class="modal-print" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal-box">
+    <h3>⎙ O que deseja imprimir?</h3>
+    <p>Escolha o tipo de documento</p>
+    <div class="modal-opts">
+      <button class="modal-opt" onclick="imprimirRelatorio()">
+        📋 Relatório completo
+        <span>Quantitativos detalhados por etapa</span>
+      </button>
+      <button class="modal-opt" onclick="verificarProParaOrcamento()">
+        🏪 Solicitação de orçamento <span class="badge bp" style="font-size:9px;margin-left:4px">pro</span>
+        <span>Lista de materiais com campo de valor para preencher na loja</span>
+      </button>
+    </div>
+    <button class="modal-cancel" onclick="document.getElementById('modalPrint').classList.remove('open')">Cancelar</button>
+  </div>
+</div>
+
+<!-- FOLHA DE ORÇAMENTO PARA IMPRESSÃO -->
+<div id="folha-orcamento">
+  <div class="forc-header">
+    <div>
+      <div class="forc-titulo">Solicitação de Orçamento de Materiais</div>
+      <div class="forc-sub">Gerado pela Calculadora de Obra</div>
+    </div>
+    <div class="forc-eng">
+      <strong>Eng. Bruno Bonente</strong><br>
+      Engenheiro Civil | CREA-MG<br>
+      @engbrunobonente
+    </div>
+  </div>
+  <div class="forc-obs">
+    ⚠️ Quantitativos exatos sem percentual de perda. Recomenda-se acrescentar 5% a 10% na compra.
+  </div>
+  <div id="forc-conteudo"></div>
+  <div class="forc-footer">
+    Calculadora de Obra — Eng. Bruno Bonente | @engbrunobonente
   </div>
 </div>
 
